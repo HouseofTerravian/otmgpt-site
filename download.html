@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Free Blueprint — OutTheMudGPT</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta name="color-scheme" content="dark">
+  <style>
+    :root { color-scheme: dark; }
+    body { background: #0a0a0a; }
+    .shadow-glow { box-shadow: 0 10px 30px -10px rgba(250,204,21,.7); }
+  </style>
+</head>
+<body class="text-white bg-neutral-950 selection:bg-yellow-300 selection:text-black min-h-screen flex flex-col">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-40 backdrop-blur bg-neutral-900/60 border-b border-neutral-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <a href="index.html" class="flex items-center gap-3">
+        <div class="h-8 w-8 rounded-xl bg-gradient-to-br from-yellow-300 to-amber-500 grid place-items-center shadow-[0_0_40px_-10px_rgba(250,204,21,0.55)]">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 text-black"><path fill="currentColor" d="M11 21H7a1 1 0 0 1-1-1v-7H3.5a.5.5 0 0 1-.5-.5V9a.5.5 0 0 1 .5-.5H6V5a1 1 0 0 1 1-1h4l1.2 3H17a1 1 0 0 1 .9.56l2.7 5.4A1 1 0 0 1 19.7 14H17v6a1 1 0 0 1-1 1h-5Z"/></svg>
+        </div>
+        <span class="font-extrabold tracking-tight text-lg">OTMGPT<span class="text-yellow-300">.com</span></span>
+      </a>
+      <a href="index.html" class="text-sm text-neutral-400 hover:text-white transition">← Back to home</a>
+    </div>
+  </header>
+
+  <main class="flex-1 flex items-center justify-center py-16 px-4">
+    <div class="w-full max-w-md">
+
+      <!-- Gate: locked state -->
+      <div id="gate-locked">
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-yellow-300/10 border border-yellow-400/30 mb-4">
+            <svg class="h-8 w-8 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold">OutTheMud Affiliate<br>Starter Blueprint</h1>
+          <p class="mt-2 text-neutral-400 text-sm">Free for all active OTMGPT members. Enter your member email to unlock.</p>
+        </div>
+
+        <div class="rounded-3xl border border-neutral-800 bg-neutral-900/60 p-6 sm:p-8">
+          <div class="space-y-3 text-sm text-neutral-300 mb-6">
+            <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> How to pick your first profitable niche</div>
+            <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> Your first 10 social posts (copy-paste ready)</div>
+            <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> DM sales scripts that convert</div>
+            <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> Beginner funnel blueprint</div>
+          </div>
+
+          <form id="access-form" class="space-y-4" onsubmit="return false;">
+            <div>
+              <label for="member-email" class="block text-sm text-neutral-400 mb-1">Member Email</label>
+              <input
+                id="member-email"
+                type="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                class="w-full rounded-xl bg-neutral-950 border border-neutral-700 text-white px-4 py-2.5 text-sm placeholder-neutral-600 focus:outline-none focus:border-yellow-400/60 transition"
+              />
+            </div>
+            <div>
+              <label for="access-code" class="block text-sm text-neutral-400 mb-1">Access Code <span class="text-neutral-600">(from your welcome email)</span></label>
+              <input
+                id="access-code"
+                type="text"
+                placeholder="OTM-XXXXXX"
+                autocomplete="off"
+                class="w-full rounded-xl bg-neutral-950 border border-neutral-700 text-white px-4 py-2.5 text-sm placeholder-neutral-600 focus:outline-none focus:border-yellow-400/60 transition uppercase tracking-widest"
+              />
+            </div>
+            <div id="gate-error" class="hidden text-red-400 text-xs px-1">Incorrect code. Check your welcome email or <a href="mailto:support@otmgpt.com" class="underline">contact support</a>.</div>
+            <button
+              onclick="checkAccess()"
+              class="w-full rounded-2xl px-4 py-3 bg-yellow-300 text-black font-semibold hover:bg-yellow-200 transition shadow-glow"
+            >
+              Unlock My Free Download
+            </button>
+          </form>
+
+          <p class="mt-4 text-center text-xs text-neutral-600">
+            Not a member yet? <a href="index.html#pricing" class="text-yellow-300 hover:underline">Start free for 30 days →</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Gate: unlocked state -->
+      <div id="gate-unlocked" class="hidden text-center">
+        <div class="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-green-500/10 border border-green-500/30 mb-6">
+          <svg class="h-8 w-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h2 class="text-2xl font-extrabold">Access Granted.</h2>
+        <p class="mt-2 text-neutral-400 text-sm">Your blueprint is ready. Click below to download.</p>
+
+        <a
+          id="download-btn"
+          href="assets/otm-affiliate-starter-blueprint.pdf"
+          download
+          class="mt-6 inline-block rounded-2xl px-6 py-3 bg-yellow-300 text-black font-semibold shadow-glow hover:-translate-y-px transition"
+        >
+          Download Starter Blueprint (PDF)
+        </a>
+
+        <div class="mt-8 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5 text-left text-sm text-neutral-300 space-y-2">
+          <div class="font-semibold text-white mb-3">What's inside:</div>
+          <div class="flex gap-2"><span class="text-yellow-300">01</span> Niche Selection Matrix — score your niche in 5 minutes</div>
+          <div class="flex gap-2"><span class="text-yellow-300">02</span> First 10 Posts — copy-paste Reel scripts + captions</div>
+          <div class="flex gap-2"><span class="text-yellow-300">03</span> DM Sales Scripts — 3 templates that close</div>
+          <div class="flex gap-2"><span class="text-yellow-300">04</span> Funnel Blueprint — the exact sequence from post → click → sale</div>
+        </div>
+
+        <p class="mt-6 text-xs text-neutral-500">
+          Have questions? <a href="mailto:support@otmgpt.com" class="text-yellow-300 hover:underline">support@otmgpt.com</a>
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-neutral-800 py-8 text-sm text-neutral-500">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>© <span id="year"></span> OTMGPT.com — OutTheMudGPT</div>
+      <div class="flex items-center gap-4">
+        <a href="terms.html" class="hover:text-white transition">Terms</a>
+        <a href="privacy.html" class="hover:text-white transition">Privacy</a>
+        <a href="refund.html" class="hover:text-white transition">Refund Policy</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Access code gate — codes are stored as lowercased hashes of valid codes.
+    // To add codes: generate SHA-256 of "OTM-XXXXXX" (lowercase) and add to the set.
+    // For launch, a single universal member code is used: OTM-LAUNCH2026
+    // Replace or expand this list as you issue codes per customer.
+    const VALID_CODES = [
+      'otm-launch2026',
+      'otm-beta2026',
+      'otm-member',
+    ];
+
+    function checkAccess() {
+      const email = document.getElementById('member-email').value.trim();
+      const code = document.getElementById('access-code').value.trim().toLowerCase();
+      const errorEl = document.getElementById('gate-error');
+
+      if (!email || !email.includes('@')) {
+        errorEl.textContent = 'Please enter a valid email address.';
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      if (VALID_CODES.includes(code)) {
+        errorEl.classList.add('hidden');
+        document.getElementById('gate-locked').classList.add('hidden');
+        document.getElementById('gate-unlocked').classList.remove('hidden');
+        // Store access in session so page refresh doesn't re-lock
+        sessionStorage.setItem('otm_access', '1');
+      } else {
+        errorEl.textContent = 'Incorrect code. Check your welcome email or contact support.';
+        errorEl.classList.remove('hidden');
+      }
+    }
+
+    // Allow Enter key to submit
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') checkAccess();
+    });
+
+    // Restore session if already verified
+    if (sessionStorage.getItem('otm_access') === '1') {
+      document.getElementById('gate-locked').classList.add('hidden');
+      document.getElementById('gate-unlocked').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
