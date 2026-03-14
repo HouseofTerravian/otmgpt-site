@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OutTheMud Affiliate Starter Blueprint — OTMGPT</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+    :root {
+      --gold: #FACC15;
+      --amber: #F59E0B;
+      --black: #0A0A0A;
+      --dark: #111111;
+      --card: #1A1A1A;
+      --border: #2A2A2A;
+      --text: #E5E5E5;
+      --muted: #888888;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--black);
+      color: var(--text);
+      font-size: 11pt;
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* ---- COVER PAGE ---- */
+    .cover {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 56px;
+      background: var(--black);
+      page-break-after: always;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      left: -120px;
+      width: 480px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(250,204,21,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cover-badge {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9pt;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(250,204,21,0.3);
+      border-radius: 100px;
+      padding: 5px 14px;
+      margin-bottom: 28px;
+    }
+
+    .cover h1 {
+      font-size: 42pt;
+      font-weight: 800;
+      line-height: 1.1;
+      color: #fff;
+      max-width: 540px;
+      margin-bottom: 8px;
+    }
+
+    .cover h1 span {
+      color: var(--gold);
+    }
+
+    .cover .subtitle {
+      font-size: 13pt;
+      color: var(--muted);
+      margin-top: 16px;
+      max-width: 440px;
+    }
+
+    .cover .tagline {
+      margin-top: 40px;
+      font-size: 10pt;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    .cover .tagline strong {
+      color: var(--gold);
+    }
+
+    .cover-divider {
+      width: 48px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 28px 0;
+    }
+
+    .cover-toc {
+      margin-top: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      max-width: 500px;
+    }
+
+    .cover-toc-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 10pt;
+      color: #ccc;
+    }
+
+    .cover-toc-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: var(--gold);
+      font-size: 9pt;
+      min-width: 22px;
+    }
+
+    .cover-footer {
+      position: absolute;
+      bottom: 40px;
+      left: 56px;
+      right: 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 8.5pt;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+    }
+
+    /* ---- INNER PAGES ---- */
+    .page {
+      min-height: 100vh;
+      padding: 56px;
+      page-break-after: always;
+      background: var(--black);
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .page-header .brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    .page-header .section-label {
+      font-size: 8.5pt;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: 24pt;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .section-intro {
+      font-size: 11pt;
+      color: #aaa;
+      max-width: 560px;
+      margin-bottom: 32px;
+      line-height: 1.7;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 14px;
+    }
+
+    .card-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11pt;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .card-body {
+      font-size: 10pt;
+      color: #bbb;
+      line-height: 1.65;
+    }
+
+    .card-label {
+      font-size: 8pt;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 5px;
+    }
+
+    /* Grid layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* Score table */
+    .score-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 24px;
+      font-size: 10pt;
+    }
+
+    .score-table th {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 8.5pt;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    .score-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(42,42,42,0.6);
+      color: #ccc;
+    }
+
+    .score-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 7.5pt;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 2px 8px;
+    }
+
+    .badge-green { background: rgba(34,197,94,0.15); color: #4ade80; }
+    .badge-yellow { background: rgba(250,204,21,0.15); color: var(--gold); }
+    .badge-red { background: rgba(239,68,68,0.12); color: #f87171; }
+
+    /* Post cards */
+    .post-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-bottom: 12px;
+    }
+
+    .post-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .post-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .post-type {
+      font-size: 8pt;
+      color: var(--muted);
+      background: rgba(255,255,255,0.05);
+      border-radius: 6px;
+      padding: 2px 8px;
+    }
+
+    .post-hook {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11pt;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .post-caption {
+      font-size: 9.5pt;
+      color: #aaa;
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    .post-cta {
+      margin-top: 10px;
+      font-size: 8.5pt;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* DM scripts */
+    .dm-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+
+    .dm-label {
+      font-size: 8pt;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .dm-label.you { color: var(--gold); }
+    .dm-label.them { color: #888; }
+
+    .dm-bubble {
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 10pt;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      max-width: 90%;
+    }
+
+    .dm-bubble.you {
+      background: rgba(250,204,21,0.1);
+      border: 1px solid rgba(250,204,21,0.2);
+      color: #eee;
+    }
+
+    .dm-bubble.them {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: #bbb;
+    }
+
+    /* Funnel */
+    .funnel-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .funnel-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(250,204,21,0.1);
+      border: 1px solid rgba(250,204,21,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 800;
+      font-size: 13pt;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    .funnel-content {}
+    .funnel-content .step-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 11pt;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+    .funnel-content .step-desc {
+      font-size: 10pt;
+      color: #aaa;
+      line-height: 1.6;
+    }
+
+    .funnel-arrow {
+      text-align: center;
+      color: var(--gold);
+      font-size: 16pt;
+      margin: 4px 0 4px 18px;
+      opacity: 0.5;
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: rgba(250,204,21,0.06);
+      border: 1px solid rgba(250,204,21,0.25);
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-top: 24px;
+    }
+
+    .highlight-box .label {
+      font-size: 8pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .highlight-box p {
+      font-size: 10pt;
+      color: #ccc;
+      line-height: 1.65;
+    }
+
+    /* Closing page */
+    .closing {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 56px;
+      text-align: center;
+      background: var(--black);
+      page-break-after: auto;
+    }
+
+    .closing h2 {
+      font-size: 32pt;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .closing h2 span { color: var(--gold); }
+
+    .closing p {
+      font-size: 12pt;
+      color: var(--muted);
+      margin-top: 16px;
+      max-width: 460px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.7;
+    }
+
+    .closing-url {
+      margin-top: 40px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14pt;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    /* Print overrides */
+    @media print {
+      @page {
+        size: letter;
+        margin: 0;
+      }
+      body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ======== COVER ======== -->
+  <div class="cover">
+    <div class="cover-badge">OTMGPT.com — Member Resource</div>
+    <h1>OutTheMud<br><span>Affiliate</span><br>Starter Blueprint</h1>
+    <div class="cover-divider"></div>
+    <p class="subtitle">Your step-by-step guide to picking a niche, posting with purpose, and closing your first affiliate sale.</p>
+
+    <div class="cover-toc">
+      <div class="cover-toc-item">
+        <span class="cover-toc-num">01</span>
+        <span>Niche Selection Matrix</span>
+      </div>
+      <div class="cover-toc-item">
+        <span class="cover-toc-num">02</span>
+        <span>First 10 Social Posts</span>
+      </div>
+      <div class="cover-toc-item">
+        <span class="cover-toc-num">03</span>
+        <span>DM Sales Scripts</span>
+      </div>
+      <div class="cover-toc-item">
+        <span class="cover-toc-num">04</span>
+        <span>Beginner Funnel Blueprint</span>
+      </div>
+    </div>
+
+    <p class="tagline">Free for all <strong>OTMGPT members</strong> — Your first dollar online starts here.</p>
+
+    <div class="cover-footer">
+      <span>© 2026 OTMGPT.com — OutTheMudGPT</span>
+      <span>Not for resale or redistribution</span>
+    </div>
+  </div>
+
+
+  <!-- ======== SECTION 01: NICHE SELECTION ======== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">OTMGPT.com</span>
+      <span class="section-label">Section 01 — Niche Selection</span>
+    </div>
+
+    <div class="section-number">01 / 04</div>
+    <h2 class="section-title">Niche Selection Matrix</h2>
+    <p class="section-intro">Your niche is everything. The right niche makes every post easier to write and every sale easier to close. Score your niche against these 5 criteria — anything above 15 is a green light.</p>
+
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th>Criteria</th>
+          <th>What to Ask</th>
+          <th>Score (1–4)</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Audience Pain</strong></td>
+          <td>Does your audience actively spend money trying to solve this problem?</td>
+          <td>4 = obvious pain, people already buying</td>
+          <td><span class="badge badge-green">High Impact</span></td>
+        </tr>
+        <tr>
+          <td><strong>Your Credibility</strong></td>
+          <td>Have you lived it, studied it, or do you genuinely care about it?</td>
+          <td>4 = lived experience / passion</td>
+          <td><span class="badge badge-green">High Impact</span></td>
+        </tr>
+        <tr>
+          <td><strong>Affiliate Offer Depth</strong></td>
+          <td>Are there at least 5 solid affiliate offers available in this niche?</td>
+          <td>4 = many strong offers on ClickBank, Digistore, etc.</td>
+          <td><span class="badge badge-yellow">Medium Impact</span></td>
+        </tr>
+        <tr>
+          <td><strong>Content Volume</strong></td>
+          <td>Can you post about this niche 5 days a week without running dry?</td>
+          <td>4 = endless content angles</td>
+          <td><span class="badge badge-yellow">Medium Impact</span></td>
+        </tr>
+        <tr>
+          <td><strong>Competition Level</strong></td>
+          <td>Is there room for you? (Some competition = good, but not oversaturated)</td>
+          <td>4 = growing niche, not dominated yet</td>
+          <td><span class="badge badge-yellow">Medium Impact</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="highlight-box" style="margin-top: 28px;">
+      <div class="label">Score Your Niche</div>
+      <p>Add up your scores. <strong style="color:#fff;">16–20 = Launch it.</strong> 11–15 = Viable, but pick a tighter angle. Under 10 = Find a different niche before you spend energy on content.</p>
+    </div>
+
+    <div class="grid-3" style="margin-top: 24px;">
+      <div class="card">
+        <div class="card-label">Best Niches for Beginners</div>
+        <div class="card-body">Fitness & weight loss, personal finance, make-money-online, relationships, beauty & skincare, sports performance</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Urban Creator Sweet Spots</div>
+        <div class="card-body">Barber business, music monetization, streetwear resale, sneaker flipping, sports training, content creation income</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Where to Find Offers</div>
+        <div class="card-body">ClickBank.com, Digistore24.com, Impact.com, ShareASale.com — filter by EPC (earnings per click) &gt; $1.00</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======== SECTION 02: FIRST 10 POSTS ======== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">OTMGPT.com</span>
+      <span class="section-label">Section 02 — First 10 Social Posts</span>
+    </div>
+
+    <div class="section-number">02 / 04</div>
+    <h2 class="section-title">Your First 10 Posts</h2>
+    <p class="section-intro">Use these templates for Instagram Reels, TikTok, or X. Swap in your niche, your offer, and your name. Post one per day for your first two weeks. Consistency beats perfection.</p>
+
+    <div class="post-card">
+      <div class="post-card-header">
+        <span class="post-num">Post 01 — Day 1</span>
+        <span class="post-type">Reel / TikTok</span>
+      </div>
+      <div class="post-hook">"I started with nothing. No followers. No money. Here's what I built in 30 days."</div>
+      <div class="post-caption">Intro post. Tell your origin story in 30–45 seconds. Show where you started, where you're going, and why you're documenting it. Don't have results yet? That's the point — you're building in public.</div>
+      <div class="post-cta">CTA → "Follow me. Day 2 drops tomorrow."</div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-header">
+        <span class="post-num">Post 02 — Day 2</span>
+        <span class="post-type">Carousel / Thread</span>
+      </div>
+      <div class="post-hook">"The 5 affiliate niches crushing it right now (and the one I picked)"</div>
+      <div class="post-caption">Educate your audience. List 5 profitable niches with a one-line reason why each works. Slide 5 = your niche + why you chose it. This positions you as someone who did the research.</div>
+      <div class="post-cta">CTA → "Save this. You'll reference it later."</div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-header">
+        <span class="post-num">Post 03 — Day 3</span>
+        <span class="post-type">Story Series</span>
+      </div>
+      <div class="post-hook">"I found an offer that pays $[X] per sale. Here's the breakdown."</div>
+      <div class="post-caption">Reveal the specific affiliate offer you're promoting. Show the commission rate, the product, and why you trust it. Authenticity here is critical — your audience needs to believe you'd actually use it.</div>
+      <div class="post-cta">CTA → "Link in bio. Swipe up for details."</div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-header">
+        <span class="post-num">Post 04 — Day 5</span>
+        <span class="post-type">Reel / TikTok</span>
+      </div>
+      <div class="post-hook">"Here's the exact routine I use to post every single day without burning out."</div>
+      <div class="post-caption">Share your content system. Morning: pick topic. Afternoon: film or write. Evening: schedule. Show it's achievable in under an hour. This attracts aspiring creators and builds authority simultaneously.</div>
+      <div class="post-cta">CTA → "Comment 'ROUTINE' and I'll DM you the full breakdown."</div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-header">
+        <span class="post-num">Post 05 — Day 7</span>
+        <span class="post-type">Proof Post</span>
+      </div>
+      <div class="post-hook">"Week 1 done. Here's what happened."</div>
+      <div class="post-caption">Your first weekly recap. Share metrics — even small ones (followers gained, DMs received, clicks, any sales). Transparency builds trust. If you have a screenshot of any commission or click data, show it. If not, show the effort and the trajectory.</div>
+      <div class="post-cta">CTA → "Week 2 starts tomorrow. Stay locked in."</div>
+    </div>
+  </div>
+
+
+  <!-- ======== SECTION 02 CONTINUED ======== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">OTMGPT.com</span>
+      <span class="section-label">Section 02 — First 10 Posts (continued)</span>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-header">
+        <span class="post-num">Post 06 — Day 8</span>
+        <span class="post-type">Tutorial / How-To</span>
+      </div>
+      <div class="post-hook">"How to get your first affiliate link set up in under 10 minutes."</div>
+      <div class="post-caption">Walk your audience through signing up for an affiliate program, getting a link, and shortening it with Bitly or your Link Hub. This is a high-save post because it's actionable. Tag your affiliate platform.</div>
+      <div class="post-cta">CTA → "Save this and start today. Link in bio."</div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-header">
+        <span class="post-num">Post 07 — Day 10</span>
+        <span class="post-type">Lifestyle / Motivation</span>
+      </div>
+      <div class="post-hook">"Nobody believed this was a real income stream. Then I showed them the numbers."</div>
+      <div class="post-caption">Speak directly to the skeptics — including the version of yourself that doubted this. Share a mindset shift or a small win that changed how you see the opportunity. This is your most shareable post type.</div>
+      <div class="post-cta">CTA → "Share this with someone who needs to see it."</div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-header">
+        <span class="post-num">Post 08 — Day 11</span>
+        <span class="post-type">Objection Buster</span>
+      </div>
+      <div class="post-hook">"'I don't have a big audience.' Stop using that as an excuse. Here's proof."</div>
+      <div class="post-caption">Address the #1 objection your audience has. Show that small audiences convert when you're speaking directly to their pain. Include a stat or example: "I made my first sale with under 200 followers." Breaks down the mental barrier to buying.</div>
+      <div class="post-cta">CTA → "No excuses. Link in bio."</div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-header">
+        <span class="post-num">Post 09 — Day 13</span>
+        <span class="post-type">Collab / Shoutout</span>
+      </div>
+      <div class="post-hook">"This creator in my niche is doing it differently — and it's working."</div>
+      <div class="post-caption">Spotlight another creator in your space. Tag them. Comment on their strategy. This gets you in front of their audience, builds relationships, and signals to the algorithm that you're part of a community. Reach out for a collab post on Day 14.</div>
+      <div class="post-cta">CTA → "Follow them. Follow me. We're both building."</div>
+    </div>
+
+    <div class="post-card">
+      <div class="post-card-header">
+        <span class="post-num">Post 10 — Day 14</span>
+        <span class="post-type">Sales / Direct Offer</span>
+      </div>
+      <div class="post-hook">"Two weeks in. Here's everything I used to get here — and where to get it."</div>
+      <div class="post-caption">Your first direct sales post. Recap your 2-week journey, show the results (clicks, commissions, growth), and make a clear offer. This is earned authority — you've built trust over 9 posts. Now it's time to convert. Include your affiliate link directly.</div>
+      <div class="post-cta">CTA → "Get in now. Link in bio. Prices go up Month 2."</div>
+    </div>
+  </div>
+
+
+  <!-- ======== SECTION 03: DM SCRIPTS ======== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">OTMGPT.com</span>
+      <span class="section-label">Section 03 — DM Sales Scripts</span>
+    </div>
+
+    <div class="section-number">03 / 04</div>
+    <h2 class="section-title">DM Sales Scripts</h2>
+    <p class="section-intro">These scripts move conversations from "I saw your post" to "I just signed up." Use them when someone engages with your content, replies to a story, or comments on a post. Be human — adapt the tone to match how you talk.</p>
+
+    <!-- Script 1 -->
+    <div class="dm-block">
+      <div class="card-label" style="margin-bottom: 14px;">Script 01 — They comment "How?" or "Tell me more"</div>
+
+      <div class="dm-label you">YOU</div>
+      <div class="dm-bubble you">"Hey [Name]! Glad my post caught your eye. Quick question — are you trying to make money online, or more focused on [specific niche]?"</div>
+
+      <div class="dm-label them">THEM</div>
+      <div class="dm-bubble them">"Both honestly. I been trying to figure out where to start."</div>
+
+      <div class="dm-label you">YOU</div>
+      <div class="dm-bubble you">"That's exactly where I was 2 weeks ago. What worked for me was starting with one affiliate offer in a niche I already knew something about. I put together a simple system using OTMGPT — it gave me the posts, the scripts, everything. Wanna see what that looks like?"</div>
+
+      <div class="dm-label them">THEM</div>
+      <div class="dm-bubble them">"Yeah send it"</div>
+
+      <div class="dm-label you">YOU</div>
+      <div class="dm-bubble you">"Here you go → [your affiliate link]. It's free to start. First month is $0. Try it and let me know what you think — I check in with everyone I refer."</div>
+    </div>
+
+    <!-- Script 2 -->
+    <div class="dm-block">
+      <div class="card-label" style="margin-bottom: 14px;">Script 02 — Cold outreach to someone who viewed your story</div>
+
+      <div class="dm-label you">YOU</div>
+      <div class="dm-bubble you">"Hey [Name] — saw you checked out my story. Were you curious about the affiliate thing or was it something else that caught you?"</div>
+
+      <div class="dm-label them">THEM</div>
+      <div class="dm-bubble them">"Yeah I been thinking about doing something like that"</div>
+
+      <div class="dm-label you">YOU</div>
+      <div class="dm-bubble you">"What's your main thing right now — barber, fitness, content? I ask because the niche matters more than most people think."</div>
+
+      <div class="dm-label them">THEM</div>
+      <div class="dm-bubble them">"I do fitness stuff"</div>
+
+      <div class="dm-label you">YOU</div>
+      <div class="dm-bubble you">"Perfect niche honestly. Fitness affiliate offers pay $40–$80 a sale and there's no shortage of buyers. The tool I use (OTMGPT) actually builds your posting schedule and DM scripts for you around your niche. Starts free. Want the link?"</div>
+    </div>
+
+    <!-- Script 3 -->
+    <div class="dm-block">
+      <div class="card-label" style="margin-bottom: 14px;">Script 03 — Handling "Is this legit?" or price objection</div>
+
+      <div class="dm-label them">THEM</div>
+      <div class="dm-bubble them">"This sounds like one of those scammy things"</div>
+
+      <div class="dm-label you">YOU</div>
+      <div class="dm-bubble you">"I get that — there's a lot of noise out there. Honest answer: I was skeptical too. The difference for me was it starts free, no card needed, and there's a 30-day money-back guarantee on the first paid month. Worst case you try it and get your money back. Best case you make your first sale in 2 weeks like I did. That's the bet I made."</div>
+
+      <div class="dm-label them">THEM</div>
+      <div class="dm-bubble them">"Ok fair. How much does it actually cost?"</div>
+
+      <div class="dm-label you">YOU</div>
+      <div class="dm-bubble you">"Month 1 is free. Then it goes up $10/month — so $10 in month 2, $20 in month 3, etc. Caps at $120. The logic is: by the time you're paying $120 you should be earning way more than that in commissions. Want to jump in while it's free?"</div>
+    </div>
+  </div>
+
+
+  <!-- ======== SECTION 04: FUNNEL BLUEPRINT ======== -->
+  <div class="page">
+    <div class="page-header">
+      <span class="brand">OTMGPT.com</span>
+      <span class="section-label">Section 04 — Beginner Funnel Blueprint</span>
+    </div>
+
+    <div class="section-number">04 / 04</div>
+    <h2 class="section-title">Beginner Funnel Blueprint</h2>
+    <p class="section-intro">A funnel is just the path someone takes from seeing your content to buying. This is the simplest version that actually works — no website, no ads, no email list required to start.</p>
+
+    <div class="funnel-step">
+      <div class="funnel-icon">1</div>
+      <div class="funnel-content">
+        <div class="step-title">Awareness Post</div>
+        <div class="step-desc">A Reel, TikTok, or X thread that stops the scroll. Lead with a hook that speaks to your audience's pain or desire. Goal: get views and saves. This is the top of your funnel — don't sell here.</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-step">
+      <div class="funnel-icon">2</div>
+      <div class="funnel-content">
+        <div class="step-title">Profile / Bio CTA</div>
+        <div class="step-desc">When someone likes your post and visits your profile, they need to see one clear action. Your bio should say what you do + a single link. Use your OTMGPT Link Hub as the one link. No clutter, no confusion.</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-step">
+      <div class="funnel-icon">3</div>
+      <div class="funnel-content">
+        <div class="step-title">Link Hub Page</div>
+        <div class="step-desc">Your one-link page with your top affiliate offers, your latest content, and your DM CTA ("Message me to learn more"). Keep it to 3–4 options max. Every link should be tracked with a UTM so you know what's converting.</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-step">
+      <div class="funnel-icon">4</div>
+      <div class="funnel-content">
+        <div class="step-title">Affiliate Offer Page</div>
+        <div class="step-desc">The merchant's sales page (not yours — you're sending them there via your affiliate link). Your job ends at the click. The offer converts them. Pick offers with a proven sales page — look for VSLs, testimonials, and a money-back guarantee.</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-step">
+      <div class="funnel-icon">5</div>
+      <div class="funnel-content">
+        <div class="step-title">Commission Paid</div>
+        <div class="step-desc">Sale happens. Commission fires to your account. Most affiliate platforms pay on a 30-day delay (to account for refunds). Your first check may take 4–6 weeks — that's normal. Keep posting. The volume is what builds the paycheck.</div>
+      </div>
+    </div>
+    <div class="funnel-arrow">↓</div>
+
+    <div class="funnel-step">
+      <div class="funnel-icon">6</div>
+      <div class="funnel-content">
+        <div class="step-title">Proof Post → Repeat</div>
+        <div class="step-desc">Screenshot the commission notification (blur exact amounts if you want). Post it. This is your most powerful content — social proof that you're actually earning. It triggers FOMO and drives new people back to the top of your funnel.</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="label">The Rule That Changes Everything</div>
+      <p>Don't optimize the funnel — optimize the <strong style="color:#fff;">volume of awareness posts.</strong> Most beginners obsess over conversion rates. The real variable is how many people enter the funnel at the top. Post more. The math handles itself.</p>
+    </div>
+
+    <div class="grid-2" style="margin-top: 20px;">
+      <div class="card">
+        <div class="card-label">Week 1–2 Focus</div>
+        <div class="card-body">Post every day. Learn what hooks get views. Don't worry about sales yet — you're building trust and data.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">Week 3–4 Focus</div>
+        <div class="card-body">Add DM scripts to high-engagement posts. Start actively closing in DMs. Your first sale usually comes from a conversation, not a click.</div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======== CLOSING PAGE ======== -->
+  <div class="closing">
+    <div class="cover-badge" style="margin: 0 auto 28px auto;">You have everything you need.</div>
+    <h2>Now go <span>OutTheMud.</span></h2>
+    <p>The blueprint is in your hands. The offer is live. The first post is one idea away. Most people read guides like this and never start. Don't be most people.</p>
+
+    <div class="closing-url">OTMGPT.com</div>
+    <p style="margin-top: 12px; font-size: 10pt; color: #555;">Log in to your account to access your AI Campaign Planner, Content Engine, and full tool suite.</p>
+
+    <div style="margin-top: 56px; border-top: 1px solid #1a1a1a; padding-top: 20px; font-size: 8.5pt; color: #444; max-width: 480px; margin-left: auto; margin-right: auto;">
+      © 2026 OTMGPT.com — OutTheMudGPT. This document is for member use only. Not for resale or redistribution. Results are not guaranteed. See otmgpt.com/disclaimer for full earnings disclaimer.
+    </div>
+  </div>
+
+</body>
+</html>
