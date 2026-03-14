@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Free Blueprint — OutTheMudGPT</title>
+  <title>Get the Blueprint — OutTheMudGPT</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <meta name="color-scheme" content="dark">
   <style>
@@ -30,82 +30,46 @@
   <main class="flex-1 flex items-center justify-center py-16 px-4">
     <div class="w-full max-w-md">
 
-      <!-- Gate: locked state -->
-      <div id="gate-locked">
-        <div class="text-center mb-8">
-          <div class="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-yellow-300/10 border border-yellow-400/30 mb-4">
-            <svg class="h-8 w-8 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-            </svg>
-          </div>
-          <h1 class="text-2xl sm:text-3xl font-extrabold">OutTheMud Affiliate<br>Starter Blueprint</h1>
-          <p class="mt-2 text-neutral-400 text-sm">Free for all active OTMGPT members. Enter your member email to unlock.</p>
-        </div>
-
-        <div class="rounded-3xl border border-neutral-800 bg-neutral-900/60 p-6 sm:p-8">
-          <div class="space-y-3 text-sm text-neutral-300 mb-6">
-            <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> How to pick your first profitable niche</div>
-            <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> Your first 10 social posts (copy-paste ready)</div>
-            <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> DM sales scripts that convert</div>
-            <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> Beginner funnel blueprint</div>
-          </div>
-
-          <form id="access-form" class="space-y-4" onsubmit="return false;">
-            <div>
-              <label for="member-email" class="block text-sm text-neutral-400 mb-1">Member Email</label>
-              <input
-                id="member-email"
-                type="email"
-                placeholder="you@example.com"
-                autocomplete="email"
-                class="w-full rounded-xl bg-neutral-950 border border-neutral-700 text-white px-4 py-2.5 text-sm placeholder-neutral-600 focus:outline-none focus:border-yellow-400/60 transition"
-              />
-            </div>
-            <div id="gate-error" class="hidden text-red-400 text-xs px-1">Please enter a valid email address.</div>
-            <button
-              onclick="checkAccess()"
-              class="w-full rounded-2xl px-4 py-3 bg-yellow-300 text-black font-semibold hover:bg-yellow-200 transition shadow-glow"
-            >
-              Unlock My Free Download
-            </button>
-          </form>
-
-          <p class="mt-4 text-center text-xs text-neutral-600">
-            Not a member yet? <a href="https://chatgpt.com/g/g-68b7c5f97a908191802c5c1cac7a7479-outthemudgpttm" target="_blank" rel="noopener" class="text-yellow-300 hover:underline">Try OTMGPT free →</a>
-          </p>
-        </div>
-      </div>
-
-      <!-- Gate: unlocked state -->
-      <div id="gate-unlocked" class="hidden text-center">
-        <div class="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-green-500/10 border border-green-500/30 mb-6">
-          <svg class="h-8 w-8 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+      <div class="text-center mb-8">
+        <div class="inline-flex items-center justify-center h-16 w-16 rounded-2xl bg-yellow-300/10 border border-yellow-400/30 mb-4">
+          <svg class="h-8 w-8 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
           </svg>
         </div>
-        <h2 class="text-2xl font-extrabold">Access Granted.</h2>
-        <p class="mt-2 text-neutral-400 text-sm">Your blueprint is ready. Click below to download.</p>
+        <h1 class="text-2xl sm:text-3xl font-extrabold">OutTheMud Affiliate<br>Starter Blueprint</h1>
+        <p class="mt-2 text-neutral-400 text-sm">Your first dollar online starts here.</p>
+      </div>
 
-        <a
-          id="download-btn"
-          href="assets/otm-affiliate-starter-blueprint.pdf"
-          download
-          class="mt-6 inline-block rounded-2xl px-6 py-3 bg-yellow-300 text-black font-semibold shadow-glow hover:-translate-y-px transition"
-        >
-          Download Starter Blueprint (PDF)
-        </a>
+      <div class="rounded-3xl border border-neutral-800 bg-neutral-900/60 p-6 sm:p-8">
 
-        <div class="mt-8 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-5 text-left text-sm text-neutral-300 space-y-2">
-          <div class="font-semibold text-white mb-3">What's inside:</div>
-          <div class="flex gap-2"><span class="text-yellow-300">01</span> Niche Selection Matrix — score your niche in 5 minutes</div>
-          <div class="flex gap-2"><span class="text-yellow-300">02</span> First 10 Posts — copy-paste Reel scripts + captions</div>
-          <div class="flex gap-2"><span class="text-yellow-300">03</span> DM Sales Scripts — 3 templates that close</div>
-          <div class="flex gap-2"><span class="text-yellow-300">04</span> Funnel Blueprint — the exact sequence from post → click → sale</div>
+        <div class="space-y-3 text-sm text-neutral-300 mb-6">
+          <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> Niche Selection Matrix — score your niche in 5 minutes</div>
+          <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> First 10 social posts (copy-paste ready)</div>
+          <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> DM sales scripts that convert</div>
+          <div class="flex items-center gap-3"><span class="text-yellow-300">✓</span> Beginner funnel blueprint</div>
         </div>
 
-        <p class="mt-6 text-xs text-neutral-500">
-          Have questions? <a href="mailto:support@otmgpt.com" class="text-yellow-300 hover:underline">support@otmgpt.com</a>
+        <div class="rounded-2xl border border-yellow-400/20 bg-yellow-300/5 px-4 py-3 text-center mb-6">
+          <span class="text-yellow-300 font-black text-2xl">$1</span>
+          <span class="text-neutral-400 text-sm ml-2">one-time • instant download</span>
+        </div>
+
+        <a
+          href="https://buy.stripe.com/14A9AS4199Tb2ba268bjW03"
+          class="w-full inline-block text-center rounded-2xl px-4 py-3 bg-yellow-300 text-black font-semibold hover:bg-yellow-200 transition shadow-glow"
+        >
+          Get the Blueprint for $1 →
+        </a>
+
+        <p class="mt-4 text-center text-xs text-neutral-600">
+          Secure checkout via Stripe. Instant PDF delivery after payment.
         </p>
+
+        <div class="mt-6 pt-5 border-t border-neutral-800 text-center">
+          <p class="text-xs text-neutral-500">Already signed up for OTMGPT?</p>
+          <a href="https://chatgpt.com/g/g-68b7c5f97a908191802c5c1cac7a7479-outthemudgpttm" target="_blank" rel="noopener" class="mt-1 inline-block text-xs text-yellow-300 hover:underline">Access your free member copy →</a>
+        </div>
+
       </div>
 
     </div>
@@ -123,34 +87,6 @@
     </div>
   </footer>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    function checkAccess() {
-      const email = document.getElementById('member-email').value.trim();
-      const errorEl = document.getElementById('gate-error');
-
-      if (!email || !email.includes('@') || !email.includes('.')) {
-        errorEl.classList.remove('hidden');
-        return;
-      }
-
-      errorEl.classList.add('hidden');
-      document.getElementById('gate-locked').classList.add('hidden');
-      document.getElementById('gate-unlocked').classList.remove('hidden');
-      sessionStorage.setItem('otm_access', '1');
-    }
-
-    // Allow Enter key to submit
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Enter') checkAccess();
-    });
-
-    // Restore session if already verified
-    if (sessionStorage.getItem('otm_access') === '1') {
-      document.getElementById('gate-locked').classList.add('hidden');
-      document.getElementById('gate-unlocked').classList.remove('hidden');
-    }
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
