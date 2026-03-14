@@ -61,17 +61,7 @@
                 class="w-full rounded-xl bg-neutral-950 border border-neutral-700 text-white px-4 py-2.5 text-sm placeholder-neutral-600 focus:outline-none focus:border-yellow-400/60 transition"
               />
             </div>
-            <div>
-              <label for="access-code" class="block text-sm text-neutral-400 mb-1">Access Code <span class="text-neutral-600">(from your welcome email)</span></label>
-              <input
-                id="access-code"
-                type="text"
-                placeholder="OTM-XXXXXX"
-                autocomplete="off"
-                class="w-full rounded-xl bg-neutral-950 border border-neutral-700 text-white px-4 py-2.5 text-sm placeholder-neutral-600 focus:outline-none focus:border-yellow-400/60 transition uppercase tracking-widest"
-              />
-            </div>
-            <div id="gate-error" class="hidden text-red-400 text-xs px-1">Incorrect code. Check your welcome email or <a href="mailto:support@otmgpt.com" class="underline">contact support</a>.</div>
+            <div id="gate-error" class="hidden text-red-400 text-xs px-1">Please enter a valid email address.</div>
             <button
               onclick="checkAccess()"
               class="w-full rounded-2xl px-4 py-3 bg-yellow-300 text-black font-semibold hover:bg-yellow-200 transition shadow-glow"
@@ -81,7 +71,7 @@
           </form>
 
           <p class="mt-4 text-center text-xs text-neutral-600">
-            Not a member yet? <a href="index.html#pricing" class="text-yellow-300 hover:underline">Start free for 30 days →</a>
+            Not a member yet? <a href="https://chatgpt.com/g/g-68b7c5f97a908191802c5c1cac7a7479-outthemudgpttm" target="_blank" rel="noopener" class="text-yellow-300 hover:underline">Try OTMGPT free →</a>
           </p>
         </div>
       </div>
@@ -136,37 +126,19 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Access code gate — codes are stored as lowercased hashes of valid codes.
-    // To add codes: generate SHA-256 of "OTM-XXXXXX" (lowercase) and add to the set.
-    // For launch, a single universal member code is used: OTM-LAUNCH2026
-    // Replace or expand this list as you issue codes per customer.
-    const VALID_CODES = [
-      'otm-launch2026',
-      'otm-beta2026',
-      'otm-member',
-    ];
-
     function checkAccess() {
       const email = document.getElementById('member-email').value.trim();
-      const code = document.getElementById('access-code').value.trim().toLowerCase();
       const errorEl = document.getElementById('gate-error');
 
-      if (!email || !email.includes('@')) {
-        errorEl.textContent = 'Please enter a valid email address.';
+      if (!email || !email.includes('@') || !email.includes('.')) {
         errorEl.classList.remove('hidden');
         return;
       }
 
-      if (VALID_CODES.includes(code)) {
-        errorEl.classList.add('hidden');
-        document.getElementById('gate-locked').classList.add('hidden');
-        document.getElementById('gate-unlocked').classList.remove('hidden');
-        // Store access in session so page refresh doesn't re-lock
-        sessionStorage.setItem('otm_access', '1');
-      } else {
-        errorEl.textContent = 'Incorrect code. Check your welcome email or contact support.';
-        errorEl.classList.remove('hidden');
-      }
+      errorEl.classList.add('hidden');
+      document.getElementById('gate-locked').classList.add('hidden');
+      document.getElementById('gate-unlocked').classList.remove('hidden');
+      sessionStorage.setItem('otm_access', '1');
     }
 
     // Allow Enter key to submit
