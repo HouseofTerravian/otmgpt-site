@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Download Ready — OutTheMudGPT</title>
+  <title>Access Granted — OutTheMudGPT</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <meta name="color-scheme" content="dark">
   <style>
@@ -30,52 +30,69 @@
   <main class="flex-1 flex items-center justify-center py-16 px-4">
     <div class="w-full max-w-md text-center">
 
-      <!-- Success icon -->
-      <div class="inline-flex items-center justify-center h-20 w-20 rounded-full bg-green-500/10 border border-green-500/30 mb-6">
-        <svg class="h-10 w-10 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-        </svg>
+      <!-- Loading state -->
+      <div id="state-loading">
+        <div class="inline-flex items-center justify-center h-20 w-20 rounded-full bg-neutral-800 border border-neutral-700 mb-6">
+          <svg class="h-8 w-8 text-neutral-400 animate-spin" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+        </div>
+        <p class="text-neutral-400">Verifying your access...</p>
       </div>
 
-      <h1 class="text-3xl font-extrabold">Payment Confirmed.</h1>
-      <p class="mt-3 text-neutral-400">Your blueprint is ready. Click below to download it now.</p>
+      <!-- Success state -->
+      <div id="state-success" class="hidden">
+        <div class="inline-flex items-center justify-center h-20 w-20 rounded-full bg-green-500/10 border border-green-500/30 mb-6">
+          <svg class="h-10 w-10 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h1 class="text-3xl font-extrabold">You're In.</h1>
+        <p class="mt-3 text-neutral-400">Your 30-day free access is confirmed. Launch the GPT and start building.</p>
 
-      <a
-        href="assets/otm-affiliate-starter-blueprint.pdf"
-        download="OutTheMud-Affiliate-Starter-Blueprint.pdf"
-        class="mt-8 inline-block rounded-2xl px-8 py-4 bg-yellow-300 text-black font-bold text-lg shadow-glow hover:-translate-y-px transition"
-      >
-        Download Your Blueprint →
-      </a>
-
-      <p class="mt-3 text-xs text-neutral-500">PDF opens immediately. Check your Downloads folder.</p>
-
-      <!-- What's inside -->
-      <div class="mt-10 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6 text-left text-sm text-neutral-300 space-y-3">
-        <div class="font-semibold text-white mb-1">What's inside:</div>
-        <div class="flex gap-3"><span class="text-yellow-300 font-bold">01</span> Niche Selection Matrix — score your niche in 5 minutes</div>
-        <div class="flex gap-3"><span class="text-yellow-300 font-bold">02</span> First 10 Posts — copy-paste Reel scripts + captions</div>
-        <div class="flex gap-3"><span class="text-yellow-300 font-bold">03</span> DM Sales Scripts — 3 templates that close</div>
-        <div class="flex gap-3"><span class="text-yellow-300 font-bold">04</span> Funnel Blueprint — the exact sequence from post → click → sale</div>
-      </div>
-
-      <!-- Next step CTA -->
-      <div class="mt-8 rounded-2xl border border-yellow-400/20 bg-yellow-300/5 p-6">
-        <p class="text-sm text-neutral-300">Ready to put the blueprint to work?</p>
-        <p class="mt-1 text-xs text-neutral-500 mb-4">Launch your 30-day free trial — no credit card required.</p>
         <a
-          href="https://chatgpt.com/g/g-68b7c5f97a908191802c5c1cac7a7479-outthemudgpttm"
+          id="gpt-link"
+          href="#"
           target="_blank"
           rel="noopener"
-          class="inline-block rounded-2xl px-5 py-2.5 bg-yellow-300 text-black font-semibold text-sm hover:bg-yellow-200 transition"
+          class="mt-8 inline-block rounded-2xl px-8 py-4 bg-yellow-300 text-black font-bold text-lg shadow-glow hover:-translate-y-px transition"
         >
-          Start OTMGPT Free →
+          Launch OTMGPT →
         </a>
+
+        <p class="mt-3 text-xs text-neutral-500">Opens in ChatGPT. Bookmark it for easy access.</p>
+
+        <!-- Blueprint upsell -->
+        <div class="mt-10 rounded-2xl border border-neutral-800 bg-neutral-900/40 p-6">
+          <p class="text-sm font-semibold text-white">Also grab the Starter Blueprint</p>
+          <p class="mt-1 text-xs text-neutral-500 mb-4">Step-by-step: niche, first 10 posts, DM scripts, funnel. $1.</p>
+          <a
+            href="download.html"
+            class="inline-block rounded-2xl px-5 py-2.5 border border-yellow-400/60 text-yellow-300 text-sm font-semibold hover:bg-yellow-300 hover:text-black transition"
+          >
+            Get the Blueprint for $1 →
+          </a>
+        </div>
+
+        <p class="mt-8 text-xs text-neutral-600">
+          Questions? <a href="mailto:support@otmgpt.com" class="text-yellow-300 hover:underline">support@otmgpt.com</a>
+        </p>
       </div>
 
-      <p class="mt-8 text-xs text-neutral-600">
-        Questions? <a href="mailto:support@otmgpt.com" class="text-yellow-300 hover:underline">support@otmgpt.com</a>
-      </p>
+      <!-- Error state -->
+      <div id="state-error" class="hidden">
+        <div class="inline-flex items-center justify-center h-20 w-20 rounded-full bg-red-500/10 border border-red-500/30 mb-6">
+          <svg class="h-10 w-10 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </div>
+        <h1 class="text-2xl font-extrabold">Access Not Verified</h1>
+        <p id="error-msg" class="mt-3 text-neutral-400 text-sm">We couldn't verify your payment. If you completed checkout, please contact support.</p>
+        <a href="mailto:support@otmgpt.com" class="mt-6 inline-block rounded-2xl px-5 py-3 border border-neutral-700 text-neutral-200 hover:border-neutral-500 transition text-sm">
+          Contact Support
+        </a>
+      </div>
 
     </div>
   </main>
@@ -92,6 +109,42 @@
     </div>
   </footer>
 
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function show(id) {
+      ['state-loading', 'state-success', 'state-error'].forEach(function(s) {
+        document.getElementById(s).classList.add('hidden');
+      });
+      document.getElementById(id).classList.remove('hidden');
+    }
+
+    async function verify() {
+      const params = new URLSearchParams(window.location.search);
+      const sessionId = params.get('session_id');
+
+      if (!sessionId) {
+        show('state-error');
+        document.getElementById('error-msg').textContent = 'No session found. Please complete checkout first.';
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/verify?session_id=' + encodeURIComponent(sessionId));
+        const data = await res.json();
+
+        if (res.ok && data.url) {
+          document.getElementById('gpt-link').href = data.url;
+          show('state-success');
+        } else {
+          show('state-error');
+        }
+      } catch (e) {
+        show('state-error');
+      }
+    }
+
+    verify();
+  </script>
 </body>
 </html>
